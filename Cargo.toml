@@ -2,6 +2,9 @@
 name = "ecds"
 version = "0.1.0"
 authors = ["Stu Small <stuart.alan.small@gmail.com>"]
+description = "Eventually consistent lockless shared datastructures"
+repository = "https://github.com/stusmall/ecds"
+license = "MIT/Apache-2.0"
 
 [dependencies]
 error-chain = "0.10"
