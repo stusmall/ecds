@@ -1,0 +1,7 @@
+[package]
+name = "ecds"
+version = "0.1.0"
+authors = ["Stu Small <stuart.alan.small@gmail.com>"]
+
+[dependencies]
+error-chain = "0.10"
