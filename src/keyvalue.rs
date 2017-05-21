@@ -1,20 +1,29 @@
-
-use std::collections::hash_map::RandomState;
-use std::collections::HashMap;
-use std::hash::BuildHasher;
-use std::hash::Hash;
-use std::sync::mpsc::Receiver;
-use std::sync::mpsc::Sender;
-use std::sync::mpsc::channel;
 use std::borrow::Borrow;
-use std::clone::Clone;
-use std::sync::mpsc::TryRecvError;
 use std::cell::RefCell;
+use std::clone::Clone;
+use std::collections::HashMap;
+use std::collections::hash_map::RandomState;
+use std::hash::{BuildHasher,Hash};
+use std::sync::mpsc::{channel,Receiver,Sender,TryRecvError};
 
 use errors::ErrorKind::Disconnected;
 use errors::Result;
 
-pub fn keyvalue<K: Eq + Hash + Clone, V: Clone>
+
+
+///
+/// ```
+/// use ecds::keyvalue;
+/// use std::thread;
+/// use std::time::Duration;
+/// let (mut w,r) = keyvalue::new();
+/// thread::spawn(move || {
+///     let _ = w.insert(1,2);
+///     thread::sleep(Duration::from_secs(60));
+/// });
+/// thread::sleep(Duration::from_secs(1));
+/// assert_eq!(2, r.get(&1).unwrap().unwrap());
+pub fn new<K: Eq + Hash + Clone, V: Clone>
     ()
     -> (WritableHashMap<K, V>, ReadOnlyHashMap<K, V>)
 {
